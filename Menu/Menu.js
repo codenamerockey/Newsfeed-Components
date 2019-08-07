@@ -34,33 +34,35 @@ let menuItems = [
   
 */
 
-function createMenu(array) {
-  //create elements
-  let menuDiv = document.createElement('div');
-  const ul = document.createElement('ul');
+window.addEventListener('load', () => {
+  function createMenu(array) {
+    //create elements
+    let menuDiv = document.createElement('div');
+    const ul = document.createElement('ul');
 
-  // Setup structure of elements
-  menuDiv.appendChild(ul);
+    // Setup structure of elements
+    menuDiv.appendChild(ul);
 
-  // set class names
-  menuDiv.classList.add('menu');
+    // set class names
+    menuDiv.classList.add('menu');
 
-  //loop through array and add li
-  array.forEach(item => {
-    let listItem = document.createElement('li');
-    listItem.textContent = item;
-    ul.appendChild(listItem);
-  });
+    //loop through array and add li
+    array.forEach(item => {
+      let listItem = document.createElement('li');
+      listItem.textContent = item;
+      ul.appendChild(listItem);
+    });
 
-  //creating a event listener
-  const menuButton = document.querySelector('.menu-button');
+    //creating a event listener
+    const menuButton = document.querySelector('.menu-button');
 
-  menuButton.addEventListener('click', e => {
-    menuDiv.classList.toggle('menu--open');
-  });
+    menuButton.addEventListener('click', e => {
+      menuDiv.classList.toggle('menu--open');
+    });
 
-  return menuDiv;
-}
+    return menuDiv;
+  }
 
-const header = document.querySelector('.header');
-header.appendChild(createMenu(menuItems));
+  const header = document.querySelector('.header');
+  header.appendChild(createMenu(menuItems));
+});

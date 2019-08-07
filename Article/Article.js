@@ -129,68 +129,70 @@ const data = [
 
 */
 
-// title, date, firstParagraph, secondParagraph, thirdParagraph
-function articleComponent(
-  title,
-  date,
-  firstParagraph,
-  secondParagraph,
-  thirdParagraph
-) {
-  // define new elements
-  let articleDiv = document.createElement('div');
-  let articleHeading = document.createElement('h2');
-  let datePara = document.createElement('p');
-  let para1 = document.createElement('p');
-  let para2 = document.createElement('p');
-  let para3 = document.createElement('p');
-  let span = document.createElement('span');
+window.addEventListener('load', () => {
+  // title, date, firstParagraph, secondParagraph, thirdParagraph
+  function articleComponent(
+    title,
+    date,
+    firstParagraph,
+    secondParagraph,
+    thirdParagraph
+  ) {
+    // define new elements
+    let articleDiv = document.createElement('div');
+    let articleHeading = document.createElement('h2');
+    let datePara = document.createElement('p');
+    let para1 = document.createElement('p');
+    let para2 = document.createElement('p');
+    let para3 = document.createElement('p');
+    let span = document.createElement('span');
 
-  // Setup structure of elements
-  articleDiv.appendChild(articleHeading);
-  articleDiv.appendChild(datePara);
-  articleDiv.appendChild(para1);
-  articleDiv.appendChild(para2);
-  articleDiv.appendChild(para3);
-  articleDiv.appendChild(span);
+    // Setup structure of elements
+    articleDiv.appendChild(articleHeading);
+    articleDiv.appendChild(datePara);
+    articleDiv.appendChild(para1);
+    articleDiv.appendChild(para2);
+    articleDiv.appendChild(para3);
+    articleDiv.appendChild(span);
 
-  // set class names
-  articleDiv.classList.add('article');
-  datePara.classList.add('date');
-  span.classList.add('expandButton');
+    // set class names
+    articleDiv.classList.add('article');
+    datePara.classList.add('date');
+    span.classList.add('expandButton');
 
-  // set text content/img src
+    // set text content/img src
 
-  articleHeading.textContent = title;
-  datePara.textContent = date;
-  para1.textContent = firstParagraph;
-  para2.textContent = secondParagraph;
-  para3.textContent = thirdParagraph;
-  span.textContent = '✎';
+    articleHeading.textContent = title;
+    datePara.textContent = date;
+    para1.textContent = firstParagraph;
+    para2.textContent = secondParagraph;
+    para3.textContent = thirdParagraph;
+    span.textContent = '✎';
 
-  span.addEventListener('click', e => {
-    articleDiv.classList.toggle('article-open');
+    span.addEventListener('click', e => {
+      articleDiv.classList.toggle('article-open');
+    });
+    //return our news feed.
+    return articleDiv;
+  }
+
+  //grabbing the div from html to house the articles
+  const articles = document.querySelector('.articles');
+
+  // mapping through the data and returning a new array and returning a function.
+  const newArticles = data.map(article => {
+    let newArticle = articleComponent(
+      article.title,
+      article.date,
+      article.firstParagraph,
+      article.secondParagraph,
+      article.thirdParagraph
+    );
+    return newArticle;
   });
-  //return our news feed.
-  return articleDiv;
-}
 
-//grabbing the div from html to house the articles
-const articles = document.querySelector('.articles');
-
-// mapping through the data and returning a new array and returning a function.
-const newArticles = data.map(article => {
-  let newArticle = articleComponent(
-    article.title,
-    article.date,
-    article.firstParagraph,
-    article.secondParagraph,
-    article.thirdParagraph
-  );
-  return newArticle;
+  newArticles.forEach(item => {
+    articles.append(item);
+  });
+  console.log(newArticles);
 });
-
-newArticles.forEach(item => {
-  articles.append(item);
-});
-console.log(newArticles);
