@@ -112,3 +112,62 @@ const data = [
   Step 5: Add a new article to the array. Make sure it is in the same format as the others. Refresh the page to see the new artible
 
 */
+
+// title, date, firstParagraph, secondParagraph, thirdParagraph
+function articleComponent(
+  title,
+  date,
+  firstParagraph,
+  secondParagraph,
+  thirdParagraph
+) {
+  // define new elements
+  let articleDiv = document.createElement('div');
+  let articleHeading = document.createElement('h2');
+  let datePara = document.createElement('p');
+  let para1 = document.createElement('p');
+  let para2 = document.createElement('p');
+  let para3 = document.createElement('p');
+  let span = document.createElement('span');
+
+  // Setup structure of elements
+  articleDiv.appendChild(articleHeading);
+  articleDiv.appendChild(datePara);
+  articleDiv.appendChild(para1);
+  articleDiv.appendChild(para2);
+  articleDiv.appendChild(para3);
+  articleDiv.appendChild(span);
+
+  // set class names
+  articleDiv.classList.add('article');
+  datePara.classList.add('date');
+  span.classList.add('expandButton');
+
+  // set text content/img src
+
+  articleHeading.textContent = title;
+  datePara.textContent = date;
+  para1.textContent = firstParagraph;
+  para2.textContent = secondParagraph;
+  para3.textContent = thirdParagraph;
+
+  articleDiv.addEventListener('click', () => {
+    span.classList.toggle('article-open');
+  });
+  //return our news feed.
+  return articleDiv;
+}
+
+const articles = document.querySelector('.articles');
+
+const newArticles = data.map(article => {
+  let newArticle = articleComponent(
+    article.title,
+    article.date,
+    article.firstParagraph,
+    article.secondParagraph,
+    article.thirdParagraph
+  );
+  return newArticle;
+});
+console.log(newArticles);
